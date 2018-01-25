@@ -11,7 +11,7 @@ trait Itemable
     /**
      * @var Collection
      */
-    public $items;
+    public $items = [];
 
     /**
      * Add an item to the group
