@@ -2,6 +2,8 @@
 
 namespace Maatwebsite\Sidebar\Traits;
 
+use Illuminate\Support\Str;
+
 trait Attributable
 {
     /**
@@ -95,7 +97,7 @@ trait Attributable
      */
     protected function getMutateMethod($attribute)
     {
-        return 'get' . studly_case($attribute);
+        return 'get' . Str::studly($attribute);
     }
 
     /**
