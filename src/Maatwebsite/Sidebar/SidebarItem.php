@@ -8,7 +8,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Routing\RouteDependencyResolverTrait;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\URL;
 use Maatwebsite\Sidebar\Traits\Attributable;
 use Maatwebsite\Sidebar\Traits\Authorizable;
 use Maatwebsite\Sidebar\Traits\Itemable;
@@ -18,10 +17,15 @@ use ReflectionFunction;
 
 class SidebarItem
 {
-    /**
+    /*
      * Traits
      */
-    use RouteDependencyResolverTrait, Attributable, Renderable, Itemable, Routeable, Authorizable;
+    use RouteDependencyResolverTrait;
+    use Attributable;
+    use Renderable;
+    use Itemable;
+    use Routeable;
+    use Authorizable;
 
     /**
      * @var
@@ -29,7 +33,8 @@ class SidebarItem
     protected $factory;
 
     /**
-     * Default view
+     * Default view.
+     *
      * @var string
      */
     protected $view = 'sidebar::item';
@@ -69,13 +74,6 @@ class SidebarItem
      */
     private $request;
 
-    /**
-     * @param Container     $container
-     * @param Request       $request
-     * @param Factory       $factory
-     * @param SidebarBadge  $badgeGenerator
-     * @param SidebarAppend $appendGenerator
-     */
     public function __construct(
         Container $container,
         Request $request,
@@ -83,17 +81,17 @@ class SidebarItem
         SidebarBadge $badgeGenerator,
         SidebarAppend $appendGenerator
     ) {
-        $this->container       = $container;
-        $this->factory         = $factory;
-        $this->badgeGenerator  = $badgeGenerator;
+        $this->container = $container;
+        $this->factory = $factory;
+        $this->badgeGenerator = $badgeGenerator;
         $this->appendGenerator = $appendGenerator;
-        $this->request         = $request;
+        $this->request = $request;
 
-        $this->items = new Collection;
+        $this->items = new Collection();
     }
 
     /**
-     * Init item
+     * Init item.
      *
      * @param $name
      *
@@ -104,13 +102,13 @@ class SidebarItem
         $instance = $this->cleanInstance();
         $instance->setAttribute('name', $name);
         $instance->setAttribute('weight', 1);
-        $instance->items = new Collection;
+        $instance->items = new Collection();
 
         return $instance;
     }
 
     /**
-     * Set active state
+     * Set active state.
      *
      * @param bool $condition
      *
@@ -124,7 +122,7 @@ class SidebarItem
     }
 
     /**
-     * Badge
+     * Badge.
      *
      * @param Closure $callback
      * @param bool    $color
@@ -137,7 +135,8 @@ class SidebarItem
 
         if ($callback instanceof Closure) {
             $parameters = $this->resolveMethodDependencies(
-                ['badge' => $badge], new ReflectionFunction($callback)
+                ['badge' => $badge],
+                new ReflectionFunction($callback)
             );
             call_user_func_array($callback, $parameters);
         } elseif (is_string($callback)) {
@@ -153,7 +152,8 @@ class SidebarItem
     }
 
     /**
-     * Has a badge
+     * Has a badge.
+     *
      * @return bool
      */
     public function hasBadge()
@@ -162,9 +162,9 @@ class SidebarItem
     }
 
     /**
-     * Append something
+     * Append something.
      *
-     * @param callable $callback
+     * @param callable|string $callback
      *
      * @return $this
      */
@@ -174,7 +174,8 @@ class SidebarItem
 
         if ($callback instanceof Closure) {
             $parameters = $this->resolveMethodDependencies(
-                ['append' => $append], new ReflectionFunction($callback)
+                ['append' => $append],
+                new ReflectionFunction($callback)
             );
             call_user_func_array($callback, $parameters);
         } elseif (is_string($callback)) {
@@ -188,7 +189,8 @@ class SidebarItem
     }
 
     /**
-     * Check if has append
+     * Check if has append.
+     *
      * @return bool
      */
     public function hasAppend()
@@ -197,7 +199,8 @@ class SidebarItem
     }
 
     /**
-     * Get item instance
+     * Get item instance.
+     *
      * @return $this
      */
     public function getItem()
@@ -206,7 +209,7 @@ class SidebarItem
     }
 
     /**
-     * Get the state
+     * Get the state.
      *
      * @param $value
      *
@@ -222,7 +225,8 @@ class SidebarItem
     }
 
     /**
-     * Check the active state
+     * Check the active state.
+     *
      * @return bool
      */
     protected function checkActiveState()
@@ -243,7 +247,7 @@ class SidebarItem
 
         return $this->request->is(
             $path,
-            $path . '/*'
+            $path.'/*'
         );
     }
 }
