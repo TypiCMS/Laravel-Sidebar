@@ -14,9 +14,11 @@ trait Itemable
     public $items = [];
 
     /**
-     * Add an item to the group
-     * @param           $name
-     * @param  Closure  $callback
+     * Add an item to the group.
+     *
+     * @param         $name
+     * @param Closure $callback
+     *
      * @return MenuItem
      */
     public function addItem($name, Closure $callback = null)
@@ -25,14 +27,15 @@ trait Itemable
 
         if ($callback && $callback instanceof Closure) {
             $parameters = $this->resolveMethodDependencies(
-                ['item' => $item], new ReflectionFunction($callback)
+                ['item' => $item],
+                new ReflectionFunction($callback)
             );
 
             call_user_func_array($callback, $parameters);
         }
 
         // Add the new item to the array
-        if (! empty($item)) {
+        if (!empty($item)) {
             $this->items->push($item);
         }
 
@@ -41,7 +44,8 @@ trait Itemable
     }
 
     /**
-     * Check if we have items
+     * Check if we have items.
+     *
      * @return bool
      */
     public function hasItems()
@@ -50,7 +54,8 @@ trait Itemable
     }
 
     /**
-     * Get all items
+     * Get all items.
+     *
      * @return array
      */
     public function getItems()

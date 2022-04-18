@@ -5,19 +5,20 @@ namespace Maatwebsite\Sidebar\Traits;
 trait Renderable
 {
     /**
-     * Render the item
+     * Render the item.
      */
     public function render()
     {
         if ($this->isAuthorized()) {
             return $this->factory->make($this->getView(), [
-                $this->getRenderType() => $this
+                $this->getRenderType() => $this,
             ])->render();
         }
     }
 
     /**
-     * Get the view
+     * Get the view.
+     *
      * @return mixed
      */
     public function getView()
@@ -38,7 +39,8 @@ trait Renderable
     }
 
     /**
-     * Get the render type
+     * Get the render type.
+     *
      * @return mixed
      */
     public function getRenderType()
@@ -47,7 +49,7 @@ trait Renderable
     }
 
     /**
-     * Too string
+     * Too string.
      */
     public function __toString()
     {

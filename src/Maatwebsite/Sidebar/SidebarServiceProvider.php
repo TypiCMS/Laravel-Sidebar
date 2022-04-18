@@ -8,21 +8,15 @@ class SidebarServiceProvider extends ServiceProvider
 {
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {
-        $views = __DIR__ . '/../../resources/views';
+        $views = __DIR__.'/../../resources/views';
 
         $this->loadViewsFrom($views, 'sidebar');
 
-        $this->publishes([
-            $views => base_path('resources/views/vendor/sidebar'),
-        ]);
+        $this->publishes([$views => base_path('resources/views/vendor/sidebar')], 'typicms-views');
 
-        $this->app->singleton(
-            'Maatwebsite\Sidebar\SidebarManager'
-        );
+        $this->app->singleton('Maatwebsite\Sidebar\SidebarManager');
     }
 }

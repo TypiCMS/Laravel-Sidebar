@@ -11,10 +11,13 @@ use Maatwebsite\Sidebar\Traits\Renderable;
 
 class SidebarBadge
 {
-    /**
+    /*
      * Traits
      */
-    use Attributable, Renderable, Itemable, Authorizable;
+    use Attributable;
+    use Renderable;
+    use Itemable;
+    use Authorizable;
 
     /**
      * @var
@@ -22,7 +25,8 @@ class SidebarBadge
     protected $factory;
 
     /**
-     * Default view
+     * Default view.
+     *
      * @var string
      */
     protected $view = 'sidebar::badge';
@@ -37,10 +41,6 @@ class SidebarBadge
      */
     protected $container;
 
-    /**
-     * @param Container $container
-     * @param Factory   $factory
-     */
     public function __construct(Container $container, Factory $factory)
     {
         $this->container = $container;
@@ -48,8 +48,10 @@ class SidebarBadge
     }
 
     /**
-     * Init item
+     * Init item.
+     *
      * @return $this
+     *
      * @internal param $name
      */
     public function init()

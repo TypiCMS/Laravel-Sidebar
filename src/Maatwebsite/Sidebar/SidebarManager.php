@@ -10,7 +10,7 @@ use ReflectionFunction;
 
 class SidebarManager
 {
-    /**
+    /*
      * Traits
      */
     use RouteDependencyResolverTrait;
@@ -35,20 +35,18 @@ class SidebarManager
      */
     public $groups;
 
-    /**
-     * @param Container    $container
-     * @param SidebarGroup $group
-     */
     public function __construct(Container $container, SidebarGroup $group)
     {
         $this->container = $container;
-        $this->group     = $group;
-        $this->groups    = new Collection;
+        $this->group = $group;
+        $this->groups = new Collection();
     }
 
     /**
-     * Build the sidebar menu
+     * Build the sidebar menu.
+     *
      * @param $callback
+     *
      * @return $this
      */
     public function build($callback = null)
@@ -61,7 +59,8 @@ class SidebarManager
     }
 
     /**
-     * Disable groups
+     * Disable groups.
+     *
      * @return $this
      */
     public function withoutGroup()
@@ -80,14 +79,16 @@ class SidebarManager
     }
 
     /**
-     * Start grouping our items
-     * @param  string       $name
-     * @param  Closure      $callback
+     * Start grouping our items.
+     *
+     * @param string  $name
+     * @param Closure $callback
+     *
      * @return SidebarGroup
      */
     public function group($name, $callback = null)
     {
-        if (! $this->groupExists($name)) {
+        if (!$this->groupExists($name)) {
             $group = $this->group->init($name);
         } else {
             $group = $this->getGroup($name);
@@ -96,14 +97,15 @@ class SidebarManager
         if ($callback instanceof Closure) {
             // Make dependency injection possible
             $parameters = $this->resolveMethodDependencies(
-                ['group' => $group], new ReflectionFunction($callback)
+                ['group' => $group],
+                new ReflectionFunction($callback)
             );
 
             call_user_func_array($callback, $parameters);
         }
 
         // Add the group to our menu groups
-        if (! empty($group)) {
+        if (!empty($group)) {
             $this->setGroup($name, $group);
         }
 
@@ -112,7 +114,8 @@ class SidebarManager
     }
 
     /**
-     * Render the sidebar
+     * Render the sidebar.
+     *
      * @return string
      */
     public function render()
@@ -124,18 +127,19 @@ class SidebarManager
 
         foreach ($groups as $group) {
             // Don't overrule user preferences
-            if (! isset($group->hideHeading)) {
+            if (!isset($group->hideHeading)) {
                 $group->hideHeading($this->withoutGroupHeading);
             }
 
             $html .= $group->render();
         }
 
-        return $html . '</ul>';
+        return $html.'</ul>';
     }
 
     /**
      * @param $name
+     *
      * @return bool
      */
     public function groupExists($name)
@@ -145,6 +149,7 @@ class SidebarManager
 
     /**
      * @param $name
+     *
      * @return mixed
      */
     public function getGroup($name)
@@ -162,7 +167,8 @@ class SidebarManager
     }
 
     /**
-     * When echo'd, render the object to a string
+     * When echo'd, render the object to a string.
+     *
      * @return string [description]
      */
     public function __toString()
@@ -172,6 +178,7 @@ class SidebarManager
 
     /**
      * @param $name
+     *
      * @return string
      */
     protected function getNameKey($name)

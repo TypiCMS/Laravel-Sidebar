@@ -13,10 +13,14 @@ use Maatwebsite\Sidebar\Traits\Renderable;
 
 class SidebarGroup
 {
-    /**
+    /*
      * Traits
      */
-    use RouteDependencyResolverTrait, Attributable, Renderable, Itemable, Authorizable;
+    use RouteDependencyResolverTrait;
+    use Attributable;
+    use Renderable;
+    use Itemable;
+    use Authorizable;
 
     /**
      * @var Container
@@ -34,7 +38,8 @@ class SidebarGroup
     protected $item;
 
     /**
-     * Default view
+     * Default view.
+     *
      * @var string
      */
     protected $view = 'sidebar::group';
@@ -44,20 +49,16 @@ class SidebarGroup
      */
     protected $renderType = 'group';
 
-    /**
-     * @param Container   $container
-     * @param Factory     $factory
-     * @param SidebarItem $item
-     */
     public function __construct(Container $container, Factory $factory, SidebarItem $item)
     {
         $this->container = $container;
-        $this->factory   = $factory;
-        $this->item      = $item;
+        $this->factory = $factory;
+        $this->item = $item;
     }
 
     /**
-     * @param               $name
+     * @param $name
+     *
      * @return SidebarGroup
      */
     public function init($name)
@@ -66,13 +67,14 @@ class SidebarGroup
         $instance = $this->cleanInstance();
         $instance->setAttribute('name', $name);
         $instance->setAttribute('weight', 1);
-        $instance->items = new Collection;
+        $instance->items = new Collection();
 
         return $instance;
     }
 
     /**
-     * @param  bool $state
+     * @param bool $state
+     *
      * @return bool
      */
     public function hideHeading($state = true)
@@ -91,7 +93,8 @@ class SidebarGroup
     }
 
     /**
-     * Get item instance
+     * Get item instance.
+     *
      * @return $this
      */
     public function getItem()

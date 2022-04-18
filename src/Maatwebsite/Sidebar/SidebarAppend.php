@@ -12,10 +12,14 @@ use Maatwebsite\Sidebar\Traits\Routeable;
 
 class SidebarAppend
 {
-    /**
+    /*
      * Traits
      */
-    use Attributable, Renderable, Itemable, Routeable, Authorizable;
+    use Attributable;
+    use Renderable;
+    use Itemable;
+    use Routeable;
+    use Authorizable;
 
     /**
      * @var
@@ -23,7 +27,8 @@ class SidebarAppend
     protected $factory;
 
     /**
-     * Default view
+     * Default view.
+     *
      * @var string
      */
     protected $view = 'sidebar::append';
@@ -38,19 +43,17 @@ class SidebarAppend
      */
     protected $container;
 
-    /**
-     * @param Container $container
-     * @param Factory   $factory
-     */
     public function __construct(Container $container, Factory $factory)
     {
-        $this->factory   = $factory;
+        $this->factory = $factory;
         $this->container = $container;
     }
 
     /**
-     * Init item
+     * Init item.
+     *
      * @return $this
+     *
      * @internal param $name
      */
     public function init()

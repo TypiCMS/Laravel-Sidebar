@@ -5,9 +5,10 @@ namespace Maatwebsite\Sidebar\Traits;
 trait Routeable
 {
     /**
-     * Set route
+     * Set route.
+     *
      * @param $route
-     * @param  array $params
+     *
      * @return $this
      */
     public function route($route, array $params = [])
@@ -16,8 +17,10 @@ trait Routeable
     }
 
     /**
-     * Get the route
+     * Get the route.
+     *
      * @param $value
+     *
      * @return string
      */
     public function getRoute($value)
@@ -27,8 +30,8 @@ trait Routeable
             return '#';
         }
 
-        if (! $value) {
-            $value = route('acp.' . $this->getRawAttribute('name') . '.index');
+        if (!$value) {
+            $value = route('acp.'.$this->getRawAttribute('name').'.index');
         }
 
         return $value;

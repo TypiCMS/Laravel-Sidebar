@@ -10,7 +10,8 @@ trait Authorizable
     protected $authorized = true;
 
     /**
-     * Check if we are authorized to see this item/group
+     * Check if we are authorized to see this item/group.
+     *
      * @return mixed
      */
     public function isAuthorized()
@@ -19,8 +20,10 @@ trait Authorizable
     }
 
     /**
-     * Authorize the group/item
-     * @param  bool  $state
+     * Authorize the group/item.
+     *
+     * @param bool $state
+     *
      * @return $this
      */
     public function authorize($state = true)
