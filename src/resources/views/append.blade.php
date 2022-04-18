@@ -1,3 +1,3 @@
-<a class="append pull-right" href="{{ $append->route }}">
-    <i class="{{ $append->icon or 'fa fa-plus' }}"></i>
+<a class="nav-sidebar-item-append" href="{{ $append->route }}">
+    <span class="nav-sidebar-item-append-icon">+</span>
 </a>

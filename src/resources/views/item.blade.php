@@ -1,7 +1,7 @@
-<li class="{{ $item->state }} @if($item->hasItems()) treeview @endif clearfix">
-    <a href="{{ $item->route }}" @if($item->hasAppend())class="hasAppend"@endif>
-        <i class="{{ $item->icon or 'fa fa-angle-double-right' }}"></i>
-        <span>{{ $item->name }}</span>
+<li class="nav-sidebar-item sidebar-item-{{ $item->id }} {{ $item->state }} @if($item->hasItems()) treeview @endif">
+    <a class="nav-sidebar-item-link @if($item->hasAppend())hasAppend @endif" href="{{ $item->route }}">
+        <i class="nav-sidebar-item-link-icon icon {{ $item->icon ?? 'fa fa-angle-double-right' }}"></i>
+        <div class="nav-sidebar-item-link-label">{{ $item->name }}</div>
 
         @if($item->hasBadge())
             @foreach($item->badges as $badge)
@@ -9,7 +9,7 @@
             @endforeach
         @endif
 
-        @if($item->hasItems())<i class="{{ $item->toggleIcon or 'fa fa-angle-left' }} pull-right"></i>@endif
+        @if($item->hasItems())<i class="{{ $item->toggleIcon ?? 'fa fa-angle-left' }} pull-right"></i>@endif
     </a>
 
     @if($item->hasAppend())
@@ -21,7 +21,7 @@
     @if($item->hasItems())
         <ul class="treeview-menu">
             @foreach($item->getItems() as $item)
-                {!! $item->render() !!}
+                @include('sidebar::item')
             @endforeach
         </ul>
     @endif
