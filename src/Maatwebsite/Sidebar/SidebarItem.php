@@ -27,11 +27,11 @@ class SidebarItem
 
     protected Factory $factory;
 
-    protected string $id;
+    public string $id;
 
-    protected string $icon;
+    public string $icon;
 
-    protected int $weight;
+    public int $weight;
 
     protected string $view = 'sidebar::item';
 

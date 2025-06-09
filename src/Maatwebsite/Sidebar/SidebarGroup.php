@@ -21,9 +21,9 @@ class SidebarGroup
 
     private Container $container;
 
-    protected string $id;
+    public string $id;
 
-    protected int $weight;
+    public int $weight;
 
     protected Factory $factory;
 
