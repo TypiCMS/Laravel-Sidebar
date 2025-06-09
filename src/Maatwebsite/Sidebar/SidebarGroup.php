@@ -4,7 +4,7 @@ namespace Maatwebsite\Sidebar;
 
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Routing\RouteDependencyResolverTrait;
+use Illuminate\Routing\ResolvesRouteDependencies;
 use Illuminate\Support\Collection;
 use Maatwebsite\Sidebar\Traits\Attributable;
 use Maatwebsite\Sidebar\Traits\Authorizable;
@@ -13,41 +13,27 @@ use Maatwebsite\Sidebar\Traits\Renderable;
 
 class SidebarGroup
 {
-    /*
-     * Traits
-     */
-    use RouteDependencyResolverTrait;
     use Attributable;
-    use Renderable;
-    use Itemable;
     use Authorizable;
+    use Itemable;
+    use Renderable;
+    use ResolvesRouteDependencies;
 
-    /**
-     * @var Container
-     */
-    private $container;
+    private Container $container;
 
-    /**
-     * @var Factory
-     */
-    protected $factory;
+    protected string $id;
 
-    /**
-     * @var SidebarItem
-     */
-    protected $item;
+    protected int $weight;
 
-    /**
-     * Default view.
-     *
-     * @var string
-     */
-    protected $view = 'sidebar::group';
+    protected Factory $factory;
 
-    /**
-     * @var string
-     */
-    protected $renderType = 'group';
+    protected SidebarItem $item;
+
+    protected string $view = 'sidebar::group';
+
+    protected string $renderType = 'group';
+
+    private bool $hideHeading;
 
     public function __construct(Container $container, Factory $factory, SidebarItem $item)
     {
@@ -56,12 +42,7 @@ class SidebarGroup
         $this->item = $item;
     }
 
-    /**
-     * @param $name
-     *
-     * @return SidebarGroup
-     */
-    public function init($name)
+    public function init(string $name): SidebarGroup
     {
         // Reset the object
         $instance = $this->cleanInstance();
@@ -72,32 +53,19 @@ class SidebarGroup
         return $instance;
     }
 
-    /**
-     * @param bool $state
-     *
-     * @return bool
-     */
-    public function hideHeading($state = true)
+    public function hideHeading(bool $state = true): bool
     {
         $this->hideHeading = $state;
 
         return false;
     }
 
-    /**
-     * @return bool
-     */
-    public function shouldShowHeading()
+    public function shouldShowHeading(): bool
     {
-        return $this->hideHeading ? false : true;
+        return !$this->hideHeading;
     }
 
-    /**
-     * Get item instance.
-     *
-     * @return $this
-     */
-    public function getItem()
+    public function getItem(): SidebarItem
     {
         return $this->item;
     }

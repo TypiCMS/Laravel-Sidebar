@@ -16,14 +16,11 @@ class SidebarAppend
      * Traits
      */
     use Attributable;
-    use Renderable;
-    use Itemable;
-    use Routeable;
     use Authorizable;
+    use Itemable;
+    use Renderable;
+    use Routeable;
 
-    /**
-     * @var
-     */
     protected $factory;
 
     /**
@@ -49,14 +46,7 @@ class SidebarAppend
         $this->container = $container;
     }
 
-    /**
-     * Init item.
-     *
-     * @return $this
-     *
-     * @internal param $name
-     */
-    public function init()
+    public function init(): SidebarAppend
     {
         return $this->cleanInstance();
     }

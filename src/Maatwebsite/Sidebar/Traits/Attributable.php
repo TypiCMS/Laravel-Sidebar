@@ -11,9 +11,6 @@ trait Attributable
      */
     protected $attributes = [];
 
-    /**
-     * return a clean instance.
-     */
     public function cleanInstance()
     {
         $instance = $this->container->make(get_class($this));
@@ -23,9 +20,6 @@ trait Attributable
 
     /**
      * Set attribute.
-     *
-     * @param $attribute
-     * @param $value
      *
      * @return $this
      */
@@ -39,9 +33,7 @@ trait Attributable
     /**
      * Get attribute.
      *
-     * @param      $attribute
      * @param null $value
-     *
      * @return null|mixed
      */
     public function getAttribute($attribute, $value = null)
@@ -58,7 +50,6 @@ trait Attributable
     /**
      * Get the raw attribute value.
      *
-     * @param            $attribute
      * @param null|mixed $value
      */
     public function getRawAttribute($attribute, $value = null)
@@ -70,14 +61,7 @@ trait Attributable
         return $value;
     }
 
-    /**
-     * Has mutator.
-     *
-     * @param $attribute
-     *
-     * @return bool
-     */
-    public function hasMutator($attribute)
+    public function hasMutator($attribute): bool
     {
         $method = $this->getMutateMethod($attribute);
 
@@ -86,9 +70,6 @@ trait Attributable
 
     /**
      * Mutate the attribute value.
-     *
-     * @param $attribute
-     * @param $value
      *
      * @return mixed
      */
@@ -99,21 +80,13 @@ trait Attributable
         return $this->{$method}($value);
     }
 
-    /**
-     * @param $attribute
-     *
-     * @return string
-     */
-    protected function getMutateMethod($attribute)
+    protected function getMutateMethod($attribute): string
     {
-        return 'get'.Str::studly($attribute);
+        return 'get' . Str::studly($attribute);
     }
 
     /**
      * Magic setter.
-     *
-     * @param $attribute
-     * @param $value
      *
      * @return mixed
      */
@@ -125,8 +98,6 @@ trait Attributable
     /**
      * Magic getter.
      *
-     * @param $attribute
-     *
      * @return null|mixed
      */
     public function __get($attribute)
@@ -137,8 +108,6 @@ trait Attributable
     /**
      * Check if attribute isset.
      *
-     * @param $attribute
-     *
      * @return null|mixed
      */
     public function __isset($attribute)
@@ -148,9 +117,6 @@ trait Attributable
 
     /**
      * Magic call.
-     *
-     * @param $method
-     * @param $params
      *
      * @return Attributable
      */

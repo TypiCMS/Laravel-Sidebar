@@ -4,36 +4,21 @@ namespace Maatwebsite\Sidebar;
 
 use Closure;
 use Illuminate\Contracts\Container\Container;
-use Illuminate\Routing\RouteDependencyResolverTrait;
+use Illuminate\Routing\ResolvesRouteDependencies;
 use Illuminate\Support\Collection;
 use ReflectionFunction;
 
 class SidebarManager
 {
-    /*
-     * Traits
-     */
-    use RouteDependencyResolverTrait;
+    use ResolvesRouteDependencies;
 
-    /**
-     * @var Container
-     */
-    protected $container;
+    protected Container $container;
 
-    /**
-     * @var SidebarGroup
-     */
-    protected $group;
+    protected SidebarGroup $group;
 
-    /**
-     * @var bool
-     */
-    protected $withoutGroupHeading = false;
+    protected bool $withoutGroupHeading = false;
 
-    /**
-     * @var Collection
-     */
-    public $groups;
+    public Collection $groups;
 
     public function __construct(Container $container, SidebarGroup $group)
     {
@@ -42,14 +27,7 @@ class SidebarManager
         $this->groups = new Collection();
     }
 
-    /**
-     * Build the sidebar menu.
-     *
-     * @param $callback
-     *
-     * @return $this
-     */
-    public function build($callback = null)
+    public function build($callback = null): SidebarManager
     {
         if ($callback instanceof Closure) {
             call_user_func($callback, $this);
@@ -58,22 +36,14 @@ class SidebarManager
         return $this;
     }
 
-    /**
-     * Disable groups.
-     *
-     * @return $this
-     */
-    public function withoutGroup()
+    public function withoutGroup(): SidebarManager
     {
         $this->withoutGroupHeading = true;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isWithoutGroupHeading()
+    public function isWithoutGroupHeading(): bool
     {
         return $this->withoutGroupHeading;
     }
@@ -81,9 +51,8 @@ class SidebarManager
     /**
      * Start grouping our items.
      *
-     * @param string  $name
+     * @param string $name
      * @param Closure $callback
-     *
      * @return SidebarGroup
      */
     public function group($name, $callback = null)
@@ -134,12 +103,10 @@ class SidebarManager
             $html .= $group->render();
         }
 
-        return $html.'</ul>';
+        return $html . '</ul>';
     }
 
     /**
-     * @param $name
-     *
      * @return bool
      */
     public function groupExists($name)
@@ -148,8 +115,6 @@ class SidebarManager
     }
 
     /**
-     * @param $name
-     *
      * @return mixed
      */
     public function getGroup($name)
@@ -157,10 +122,6 @@ class SidebarManager
         return $this->groups->get($this->getNameKey($name));
     }
 
-    /**
-     * @param $name
-     * @param $group
-     */
     public function setGroup($name, $group)
     {
         $this->groups->put($this->getNameKey($name), $group);
@@ -177,8 +138,6 @@ class SidebarManager
     }
 
     /**
-     * @param $name
-     *
      * @return string
      */
     protected function getNameKey($name)

@@ -4,9 +4,6 @@ namespace Maatwebsite\Sidebar\Traits;
 
 trait Renderable
 {
-    /**
-     * Render the item.
-     */
     public function render()
     {
         if ($this->isAuthorized()) {
@@ -17,8 +14,6 @@ trait Renderable
     }
 
     /**
-     * Get the view.
-     *
      * @return mixed
      */
     public function getView()
@@ -26,12 +21,7 @@ trait Renderable
         return $this->view;
     }
 
-    /**
-     * @param $view
-     *
-     * @return $this
-     */
-    public function setView($view)
+    public function setView($view): self
     {
         $this->view = $view;
 
@@ -39,8 +29,6 @@ trait Renderable
     }
 
     /**
-     * Get the render type.
-     *
      * @return mixed
      */
     public function getRenderType()
@@ -48,9 +36,6 @@ trait Renderable
         return $this->renderType;
     }
 
-    /**
-     * Too string.
-     */
     public function __toString()
     {
         return $this->render();

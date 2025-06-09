@@ -6,12 +6,9 @@ use Illuminate\Support\ServiceProvider;
 
 class SidebarServiceProvider extends ServiceProvider
 {
-    /**
-     * Register the service provider.
-     */
     public function register()
     {
-        $views = __DIR__.'/../../resources/views';
+        $views = __DIR__ . '/../../resources/views';
 
         $this->loadViewsFrom($views, 'sidebar');
 
