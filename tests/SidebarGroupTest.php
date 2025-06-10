@@ -29,12 +29,12 @@ class SidebarGroupTest extends PHPUnit_Framework_TestCase
      */
     protected $item;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->container = m::mock(Container::class);
 
         $this->factory = m::mock(Factory::class);
-        $this->item    = m::mock(SidebarItem::class);
+        $this->item = m::mock(SidebarItem::class);
         $this->item->shouldReceive('init')->andReturnSelf();
 
         $this->group = new SidebarGroup(

@@ -41,12 +41,12 @@ class SidebarItemTest extends PHPUnit_Framework_TestCase
      */
     protected $request;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->container = m::mock(Container::class);
-        $this->request   = m::mock(Request::class);
-        $this->factory   = m::mock(Factory::class);
-        $this->badge     = m::mock(SidebarBadge::class);
+        $this->request = m::mock(Request::class);
+        $this->factory = m::mock(Factory::class);
+        $this->badge = m::mock(SidebarBadge::class);
         $this->badge->shouldReceive('init')->andReturnSelf();
         $this->append = m::mock(SidebarAppend::class);
         $this->append->shouldReceive('init')->andReturnSelf();

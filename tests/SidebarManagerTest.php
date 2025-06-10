@@ -22,10 +22,10 @@ class SidebarManagerTest extends PHPUnit_Framework_TestCase
      */
     protected $group;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->container = m::mock(Container::class);
-        $this->group     = m::mock(SidebarGroup::class);
+        $this->group = m::mock(SidebarGroup::class);
         $this->group->shouldReceive('init')->andReturnSelf();
 
         $this->manager = new SidebarManager(
@@ -49,8 +49,8 @@ class SidebarManagerTest extends PHPUnit_Framework_TestCase
     public function test_can_build_a_group()
     {
         $this->group->shouldReceive('getAttribute')
-                    ->with('name')
-                    ->andReturn('1');
+            ->with('name')
+            ->andReturn('1');
 
         $group = $this->manager->group('1');
         $this->assertInstanceOf(SidebarGroup::class, $group);
@@ -109,10 +109,6 @@ class SidebarManagerTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class StubSidebar1 extends SidebarManager
-{
-}
+class StubSidebar1 extends SidebarManager {}
 
-class StubSidebar2 extends SidebarManager
-{
-}
+class StubSidebar2 extends SidebarManager {}
