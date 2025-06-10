@@ -95,13 +95,3 @@ class SidebarItemTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('active', $this->item->getState());
     }
 }
-
-function url()
-{
-    return 'localhost';
-}
-
-function route()
-{
-    return 'localhost/route';
-}
