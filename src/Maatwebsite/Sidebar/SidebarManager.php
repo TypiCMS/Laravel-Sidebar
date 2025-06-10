@@ -48,14 +48,7 @@ class SidebarManager
         return $this->withoutGroupHeading;
     }
 
-    /**
-     * Start grouping our items.
-     *
-     * @param string $name
-     * @param Closure $callback
-     * @return SidebarGroup
-     */
-    public function group($name, $callback = null)
+    public function group(string $name, ?Closure $callback = null): SidebarGroup
     {
         if (!$this->groupExists($name)) {
             $group = $this->group->init($name);
@@ -82,12 +75,7 @@ class SidebarManager
         return $group;
     }
 
-    /**
-     * Render the sidebar.
-     *
-     * @return string
-     */
-    public function render()
+    public function render(): string
     {
         $html = '<ul class="sidebar-menu">';
 
@@ -106,10 +94,7 @@ class SidebarManager
         return $html . '</ul>';
     }
 
-    /**
-     * @return bool
-     */
-    public function groupExists($name)
+    public function groupExists($name): bool
     {
         return $this->groups->has($this->getNameKey($name));
     }
@@ -117,38 +102,27 @@ class SidebarManager
     /**
      * @return mixed
      */
-    public function getGroup($name)
+    public function getGroup(string $name)
     {
         return $this->groups->get($this->getNameKey($name));
     }
 
-    public function setGroup($name, $group)
+    public function setGroup(string $name, SidebarGroup $group): void
     {
         $this->groups->put($this->getNameKey($name), $group);
     }
 
-    /**
-     * When echo'd, render the object to a string.
-     *
-     * @return string [description]
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->render();
     }
 
-    /**
-     * @return string
-     */
-    protected function getNameKey($name)
+    protected function getNameKey(string $name): string
     {
         return md5($name);
     }
 
-    /**
-     * @return Collection|SidebarGroup[]
-     */
-    public function getGroups()
+    public function getGroups(): Collection
     {
         return $this->groups;
     }
