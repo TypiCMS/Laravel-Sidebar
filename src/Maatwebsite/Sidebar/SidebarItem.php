@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
-use Illuminate\Routing\ResolvesRouteDependencies;
+use Illuminate\Routing\RouteDependencyResolverTrait;
 use Illuminate\Support\Collection;
 use Maatwebsite\Sidebar\Traits\Attributable;
 use Maatwebsite\Sidebar\Traits\Authorizable;
@@ -22,8 +22,8 @@ class SidebarItem
     use Authorizable;
     use Itemable;
     use Renderable;
-    use ResolvesRouteDependencies;
     use Routeable;
+    use RouteDependencyResolverTrait;
 
     protected Factory $factory;
 

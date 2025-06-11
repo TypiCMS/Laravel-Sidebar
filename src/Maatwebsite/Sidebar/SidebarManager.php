@@ -4,13 +4,13 @@ namespace Maatwebsite\Sidebar;
 
 use Closure;
 use Illuminate\Contracts\Container\Container;
-use Illuminate\Routing\ResolvesRouteDependencies;
+use Illuminate\Routing\RouteDependencyResolverTrait;
 use Illuminate\Support\Collection;
 use ReflectionFunction;
 
 class SidebarManager
 {
-    use ResolvesRouteDependencies;
+    use RouteDependencyResolverTrait;
 
     protected Container $container;
 

@@ -4,7 +4,7 @@ namespace Maatwebsite\Sidebar;
 
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Routing\ResolvesRouteDependencies;
+use Illuminate\Routing\RouteDependencyResolverTrait;
 use Illuminate\Support\Collection;
 use Maatwebsite\Sidebar\Traits\Attributable;
 use Maatwebsite\Sidebar\Traits\Authorizable;
@@ -17,7 +17,7 @@ class SidebarGroup
     use Authorizable;
     use Itemable;
     use Renderable;
-    use ResolvesRouteDependencies;
+    use RouteDependencyResolverTrait;
 
     private Container $container;
 
